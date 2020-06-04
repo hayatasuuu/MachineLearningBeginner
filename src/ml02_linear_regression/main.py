@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from sklearn.datasets import load_boston
 from sklearn.linear_model import LinearRegression
@@ -10,7 +11,7 @@ df['MEDV'] = boston.target
 print('-'*10 + 'データフレーム' + '-'*10)
 print(df.head())
 
-X = df.drop('MEDV', axis=1)
+X = np.array(df['RM']).reshape(-1, 1)
 y = df['MEDV']
 print('-'*10 + '特徴量とターゲットに分割' + '-'*10)
 print('X:', X.shape)
@@ -24,6 +25,7 @@ lm.fit(X_train, y_train)
 print('-'*10 + '学習結果' + '-'*10)
 print('バイアス:', lm.intercept_)
 print('重み:', lm.coef_)
+
 print('-'*10 + 'モデルの評価' + '-'*10)
 print('Train Score:', lm.score(X_train, y_train))
 print('Test Score:', lm.score(X_test, y_test))
